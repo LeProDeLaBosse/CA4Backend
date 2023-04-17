@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Flask Todo App</title>
+</head>
+<body>
+    <h1>Flask Todo App</h1>
+
+    <form action="/add" method="post">
+        <label for="todo">Todo item:</label>
+        <input type="text" name="todo">
+        <button type="submit">Add Todo</button>
+    </form>
+
+    <ul>
+    {% for todo in todos %}
+        <li>
+            <input type="checkbox" name="important" value="{{ todo._id }}"> 
+            {% if todo.complete %}
+                <del>{{ todo.text }}</del> - <a href="{{ url_for('index') }}">(undo)</a>
+            {% else %}
+                {{ todo.text }} - 
+                <a href="/complete/{{ todo._id }}">(complete)</a> - 
+                <form action="/delete/{{ todo._id }}" method="post">
+                    <button type="submit">Delete</button>
+                </form>
+            {% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+
+</body>
+</html>
