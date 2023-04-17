@@ -1,0 +1,15 @@
+This is a Flask application for a todo list. It uses MongoDB as the database and allows users to add new tasks, mark tasks as complete, delete tasks, and toggle tasks as important.
+
+The main route / displays a list of all the current tasks from the database in the index.html template. The template shows the task text, with the option to mark it as complete or delete it. If the task is complete, it is displayed with a strikethrough, and there is an option to undo the completed status.
+
+The /add route adds a new task to the database. The task is retrieved from the request form, and a new document is inserted into the todos collection with the task text and a default complete value of False.
+
+The /complete/<ObjectId:todo_id> route marks a task as complete when the user clicks the complete link next to a task. The route first finds the task with the given todo_id in the database, sets the complete field to True, and then saves the updated document to the database.
+
+The /toggle_important/<ObjectId:todo_id> route allows users to toggle a task as important by clicking a checkbox next to the task text. The route finds the task with the given todo_id, toggles the important field, and then saves the updated document to the database.
+
+The /delete/<ObjectId:todo_id> route deletes a task from the database when the user clicks the delete button next to a task. The route finds the task with the given todo_id and then deletes it from the database.
+
+The test_complete() function tests the /complete route by adding a sample task to the database, marking it as complete using a simulated request, and then checking that the task is marked as complete in the database.
+
+Finally, the index.html template displays the task list and provides the form for adding new tasks. It uses a for loop to iterate through each task document in the todos collection and display its text, completion status, and options to mark it as complete or delete it.
